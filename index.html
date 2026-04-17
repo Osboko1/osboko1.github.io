@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub Projects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <!-- ============================================================
+       EASY CUSTOMISATION — edit these variables to make it yours
+       ============================================================ -->
+  <script>
+    const CONFIG = {
+      // ── Identity ─────────────────────────────────────────────
+      name:        "Your Name",
+      tagline:     "Building cool things with code.",
+      githubUrl:   "https://github.com/yourusername",
+      githubHandle:"yourusername",
+
+      // ── Contact (set to "" to hide the button) ────────────────
+      email:       "you@example.com",
+
+      // ── Projects ─────────────────────────────────────────────
+      // Each project:
+      //   name        — project title
+      //   description — one-sentence summary
+      //   url         — link (GitHub repo or live site)
+      //   featured    — set true to make it span 2 columns on desktop
+      projects: [
+        {
+          name:        "Project Alpha",
+          description: "A blazing-fast CLI tool that automates repetitive dev workflows.",
+          url:         "https://github.com/yourusername/project-alpha",
+          featured:    true,
+        },
+        {
+          name:        "Project Beta",
+          description: "Open-source React component library with zero runtime dependencies.",
+          url:         "https://github.com/yourusername/project-beta",
+        },
+        {
+          name:        "Project Gamma",
+          description: "Lightweight Python scraper with a clean declarative API.",
+          url:         "https://github.com/yourusername/project-gamma",
+        },
+        {
+          name:        "Project Delta",
+          description: "Real-time collaborative whiteboard powered by CRDTs.",
+          url:         "https://github.com/yourusername/project-delta",
+          featured:    true,
+        },
+        {
+          name:        "Project Epsilon",
+          description: "Self-hosted analytics dashboard — no cookies, no nonsense.",
+          url:         "https://github.com/yourusername/project-epsilon",
+        },
+        {
+          name:        "Project Zeta",
+          description: "Minimal static site generator that fits in a single file.",
+          url:         "https://github.com/yourusername/project-zeta",
+        },
+      ],
+    };
+  </script>
+
+  <style>
+    /* ── Reset ────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0a0a0f;
+      --surface: #111118;
+      --border:  rgba(255,255,255,0.07);
+      --text:    #e4e4f0;
+      --muted:   #6c6c88;
+      --radius:  12px;
+      --font-display: 'Syne', sans-serif;
+      --font-mono:    'Space Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-display);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Noise grain ──────────────────────────────────────────── */
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Rainbow keyframes ────────────────────────────────────── */
+    @keyframes rainbowText {
+      0%   { color: #ff6b6b; }
+      16%  { color: #ffb347; }
+      33%  { color: #ffe066; }
+      50%  { color: #5af78e; }
+      66%  { color: #57c7ff; }
+      83%  { color: #b48eff; }
+      100% { color: #ff6b6b; }
+    }
+
+    @keyframes rainbowBlob {
+      0%   { background: radial-gradient(circle, rgba(255,107,107,0.14) 0%, transparent 70%); }
+      16%  { background: radial-gradient(circle, rgba(255,179,71,0.14)  0%, transparent 70%); }
+      33%  { background: radial-gradient(circle, rgba(255,224,102,0.14) 0%, transparent 70%); }
+      50%  { background: radial-gradient(circle, rgba(90,247,142,0.14)  0%, transparent 70%); }
+      66%  { background: radial-gradient(circle, rgba(87,199,255,0.14)  0%, transparent 70%); }
+      83%  { background: radial-gradient(circle, rgba(180,142,255,0.14) 0%, transparent 70%); }
+      100% { background: radial-gradient(circle, rgba(255,107,107,0.14) 0%, transparent 70%); }
+    }
+
+    @keyframes rainbowBorder {
+      0%   { border-color: rgba(255,107,107,0.55); }
+      16%  { border-color: rgba(255,179,71,0.55);  }
+      33%  { border-color: rgba(255,224,102,0.55); }
+      50%  { border-color: rgba(90,247,142,0.55);  }
+      66%  { border-color: rgba(87,199,255,0.55);  }
+      83%  { border-color: rgba(180,142,255,0.55); }
+      100% { border-color: rgba(255,107,107,0.55); }
+    }
+
+    @keyframes rainbowCardGlow {
+      0%   { background: rgba(255,107,107,0.07); }
+      16%  { background: rgba(255,179,71,0.07);  }
+      33%  { background: rgba(255,224,102,0.07); }
+      50%  { background: rgba(90,247,142,0.07);  }
+      66%  { background: rgba(87,199,255,0.07);  }
+      83%  { background: rgba(180,142,255,0.07); }
+      100% { background: rgba(255,107,107,0.07); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Glow blob ────────────────────────────────────────────── */
+    .blob {
+      position: fixed;
+      width: 650px; height: 650px;
+      border-radius: 50%;
+      top: -200px; left: -200px;
+      pointer-events: none;
+      z-index: 0;
+      transition: transform 1.4s cubic-bezier(.16,1,.3,1);
+      animation: rainbowBlob 14s linear infinite;
+    }
+
+    /* ── Layout ───────────────────────────────────────────────── */
+    .wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Header ───────────────────────────────────────────────── */
+    header {
+      padding: 100px 0 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp .6s .1s ease forwards, rainbowText 14s linear infinite;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      opacity: 0;
+      animation: fadeUp .6s .2s ease forwards, rainbowText 14s linear infinite;
+    }
+
+    .tagline {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.6;
+      font-weight: 400;
+      opacity: 0;
+      animation: fadeUp .6s .3s ease forwards;
+    }
+
+
+
+    /* ── Divider ──────────────────────────────────────────────── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp .6s .5s ease forwards;
+    }
+    .divider-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Grid ─────────────────────────────────────────────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 100px;
+    }
+    @media (max-width: 640px) {
+      .grid { grid-template-columns: 1fr; }
+      .featured { grid-column: span 1 !important; }
+    }
+    .featured { grid-column: span 2; }
+
+    /* ── Card ─────────────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 28px 56px;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transition: transform .2s;
+      animation: fadeUp .5s ease forwards;
+    }
+
+    /* rainbow glow overlay on hover */
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity .3s;
+      animation: rainbowCardGlow 14s linear infinite;
+      border-radius: var(--radius);
+    }
+    .card:hover::after { opacity: 1; }
+
+    .card:hover {
+      transform: translateY(-3px);
+      animation: fadeUp .5s ease forwards, rainbowBorder 14s linear infinite;
+    }
+
+    .card-name {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-description {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.65;
+      font-weight: 400;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-arrow {
+      position: absolute;
+      right: 24px;
+      bottom: 24px;
+      color: var(--muted);
+      transition: transform .2s;
+      z-index: 1;
+    }
+    .card:hover .card-arrow {
+      transform: translate(3px, -3px);
+      animation: rainbowText 14s linear infinite;
+    }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 36px 0;
+    }
+    .footer-left {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob" id="blob"></div>
+
+  <div class="wrapper">
+    <header>
+      <p class="eyebrow">// portfolio</p>
+      <h1 id="name-heading"></h1>
+      <p class="tagline" id="tagline"></p>
+
+    </header>
+
+    <div class="divider">
+      <span class="divider-label">Projects</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <footer>
+      <p class="footer-left" id="footer-left"></p>
+    </footer>
+  </div>
+
+  <script>
+    // ── Header ────────────────────────────────────────────────────
+    document.getElementById('name-heading').textContent = CONFIG.name;
+    document.getElementById('tagline').textContent = CONFIG.tagline;
+    // ── Cards ─────────────────────────────────────────────────────
+    const grid = document.getElementById('grid');
+    CONFIG.projects.forEach((p, i) => {
+      const a = document.createElement('a');
+      a.href = p.url || '#';
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.className = 'card' + (p.featured ? ' featured' : '');
+      a.style.animationDelay = `${0.55 + i * 0.08}s`;
+
+      a.innerHTML = `
+        <span class="card-name">${p.name}</span>
+        <p class="card-description">${p.description}</p>
+        <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17 17 7M7 7h10v10"/>
+        </svg>
+      `;
+
+      grid.appendChild(a);
+    });
+
+    // ── Footer ────────────────────────────────────────────────────
+    document.getElementById('footer-left').textContent =
+      `© ${new Date().getFullYear()} ${CONFIG.name} · @${CONFIG.githubHandle}`;
+
+    // ── Blob follow cursor ────────────────────────────────────────
+    const blob = document.getElementById('blob');
+    document.addEventListener('mousemove', e => {
+      blob.style.transform = `translate(${e.clientX - 325}px, ${e.clientY - 325}px)`;
+    });
+  </script>
+</body>
+</html>
